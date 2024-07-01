@@ -44,7 +44,7 @@ CREATE TABLE `Usuarios` (
     `id_usuario` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(255) NOT NULL,
     `cpf` INT NOT NULL,
-    `data_nascimento` DATE NOT NULL
+    `data_nascimento` VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE `Livros` (
@@ -66,10 +66,10 @@ CREATE TABLE `Funcionarios` (
 
 CREATE TABLE `Emprestimos` (
     `id_emprestimo` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `data_emprestimo` DATE NOT NULL,
-    `data_prazo` DATE NOT NULL,
-    `data_devolucao` DATE NOT NULL,
-    `horario` TIME NOT NULL,
+    `data_emprestimo` VARCHAR(10) NOT NULL,
+    `data_prazo` VARCHAR(10) NOT NULL,
+    `data_devolucao` VARCHAR(10) NOT NULL,
+    `horario` VARCHAR(8) NOT NULL,
     `id_multa` INT UNSIGNED NOT NULL,
     `id_usuario` INT UNSIGNED NOT NULL,
     `id_livro` INT UNSIGNED NOT NULL,
@@ -80,4 +80,5 @@ CREATE TABLE `Emprestimos` (
     FOREIGN KEY (`id_usuario`) REFERENCES `Usuarios`(`id_usuario`),
     FOREIGN KEY (`id_livro`) REFERENCES `Livros`(`id_livro`)
 );
+
 ```
