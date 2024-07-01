@@ -34,8 +34,8 @@ CREATE TABLE `Funcionários`(
     `funcao` TEXT NOT NULL,
     `id_Livros` BIGINT NOT NULL
 );
-CREATE TABLE `Locatário`(
-    `id_usuarios` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `Leitores`(
+    `id_Leitor` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` TEXT NOT NULL,
     `idade` INT NOT NULL,
     `data_nascimento` DATE NOT NULL,
