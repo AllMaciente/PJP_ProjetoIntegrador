@@ -35,7 +35,7 @@ CREATE TABLE `Funcionários`(
     `id_Livros` BIGINT NOT NULL
 );
 CREATE TABLE `Leitores`(
-    `id_Leitor` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_leitor` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` TEXT NOT NULL,
     `idade` INT NOT NULL,
     `data_nascimento` DATE NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `Livros`(
 ALTER TABLE
     `Emprestimos_livros` ADD CONSTRAINT `emprestimos_livros_id_livros_foreign` FOREIGN KEY(`id_livros`) REFERENCES `Livros`(`id_Livros`);
 ALTER TABLE
-    `Emprestimos` ADD CONSTRAINT `emprestimos_id_emprestimos_foreign` FOREIGN KEY(`id_emprestimos`) REFERENCES `Locatário`(`id_usuarios`);
+    `Emprestimos` ADD CONSTRAINT `emprestimos_id_emprestimos_foreign` FOREIGN KEY(`id_emprestimos`) REFERENCES `Locatário`(`id_leitor`);
 ALTER TABLE
     `Funcionários` ADD CONSTRAINT `funcionários_id_livros_foreign` FOREIGN KEY(`id_Livros`) REFERENCES `Livros`(`id_Livros`);
 ALTER TABLE
