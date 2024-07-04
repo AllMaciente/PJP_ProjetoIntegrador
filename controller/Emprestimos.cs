@@ -6,4 +6,8 @@ public class ControllerEmprestimo
     {
         Emprestimo.testDB();
     }
+    public static List<Emprestimo> ListarEmprestimos()
+    {
+        return Emprestimo.ListarEmprestimo();
+    }
 }

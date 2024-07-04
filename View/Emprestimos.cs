@@ -21,6 +21,54 @@ public class ViewEmprestimos : Form
 
         Controls.Add(DgvEmprestimos);
         // ControllerEmprestimo.Sincronizar();
-        // Listar();
+        Listar();
+    }
+    private void Listar()
+    {
+        List<Emprestimo> emprestimos = ControllerEmprestimo.ListarEmprestimos();
+        DgvEmprestimos.Columns.Clear();
+        DgvEmprestimos.AutoGenerateColumns = false;
+        DgvEmprestimos.DataSource = emprestimos;
+
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Id",
+            HeaderText = "Id"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Data_emprestimo",
+            HeaderText = "Data_emprestimo"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Data_prazo",
+            HeaderText = "Data_prazo"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Data_devolucao",
+            HeaderText = "Data_devolucao"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Horario",
+            HeaderText = "Horario"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Id_multa",
+            HeaderText = "Id_multa"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Id_usuario",
+            HeaderText = "Id_usuario"
+        });
+        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Id_livro",
+            HeaderText = "Id_livro"
+        });
     }
 }

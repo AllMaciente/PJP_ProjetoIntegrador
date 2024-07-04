@@ -13,6 +13,10 @@ public class Emprestimo
     public int id_livro { get; set; }
 
     public Emprestimo() { }
+    public static List<Emprestimo> ListarEmprestimo()
+    {
+        return RepoEmprestimos.ListEmprestimos();
+    }
     public static void testDB()
     {
         RepoEmprestimos.InitConexao();
