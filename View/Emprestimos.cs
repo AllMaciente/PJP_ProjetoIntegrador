@@ -1,5 +1,5 @@
-// using Controller;
-// using Model;
+using Controller;
+using Model;
 
 namespace View;
 
@@ -8,6 +8,7 @@ public class ViewEmprestimos : Form
     private readonly DataGridView DgvEmprestimos;
     public ViewEmprestimos()
     {
+        ControllerEmprestimo.testDB();
         // ControllerEmprestimo.Sincronizar();
 
         Size = new Size(800, 400);
