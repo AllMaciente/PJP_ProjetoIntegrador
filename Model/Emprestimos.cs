@@ -13,6 +13,10 @@ public class Emprestimo
     public int id_livro { get; set; }
 
     public Emprestimo() { }
+    public static List<Emprestimo> Sincronizar()
+    {
+        return RepoEmprestimos.Sincronizar();
+    }
     public static List<Emprestimo> ListarEmprestimo()
     {
         return RepoEmprestimos.ListEmprestimos();

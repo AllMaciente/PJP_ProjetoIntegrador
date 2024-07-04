@@ -9,7 +9,7 @@ public class ViewEmprestimos : Form
     public ViewEmprestimos()
     {
         ControllerEmprestimo.testDB();
-        // ControllerEmprestimo.Sincronizar();
+        ControllerEmprestimo.Sincronizar();
 
         Size = new Size(800, 400);
         StartPosition = FormStartPosition.CenterScreen;
@@ -63,12 +63,12 @@ public class ViewEmprestimos : Form
         DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
         {
             DataPropertyName = "Id_usuario",
-            HeaderText = "Id_usuario"
+            HeaderText = "Usuario"
         });
         DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
         {
             DataPropertyName = "Id_livro",
-            HeaderText = "Id_livro"
+            HeaderText = "Livro"
         });
     }
 }
