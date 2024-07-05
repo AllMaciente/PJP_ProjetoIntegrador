@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using Repo;
 
 namespace Model;
@@ -12,6 +11,9 @@ public class Emprestimo
     public int Id_multa { get; set; }
     public int Id_usuario { get; set; }
     public int id_livro { get; set; }
+    public string Usuario { get; set; }
+    public string Livro { get; set; }
+
 
     public Emprestimo() { }
     public static List<Emprestimo> Sincronizar()
@@ -29,5 +31,4 @@ public class Emprestimo
         RepoEmprestimos.CloseConexao();
 
     }
-
 }

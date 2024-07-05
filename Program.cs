@@ -1,5 +1,6 @@
-namespace PJP_ProjetoIntegrador;
 using View;
+namespace PJP_ProjetoIntegrador;
+
 static class Program
 {
     static void Main()
