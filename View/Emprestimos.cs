@@ -26,9 +26,9 @@ public class ViewEmprestimos : Form
     private readonly ListBox LbUsuario;
     private readonly ListBox LbLivro;
 
-    private readonly Button btnCreate;
-    private readonly Button btnAlterar;
-    private readonly Button btnDelete;
+    private readonly Button BtnCreate;
+    private readonly Button BtnAlterar;
+    private readonly Button BtnDelete;
 
     public ViewEmprestimos()
     {
@@ -132,6 +132,30 @@ public class ViewEmprestimos : Form
             Size = new Size(150, 175),
         };
 
+        BtnCreate = new Button
+        {
+            Text = "Create",
+            Location = new Point(700, sep),
+            Size = new Size(100, 20)
+        };
+        BtnCreate.Click += ClickCreate;
+
+        BtnAlterar = new Button
+        {
+            Text = "Alterar",
+            Location = new Point(700, sep + sep),
+            Size = new Size(100, 20)
+        };
+        // BtnAlterar.Click += ClickAlterar;
+
+        BtnDelete = new Button
+        {
+            Text = "Delete",
+            Location = new Point(700, sep + (sep * 2)),
+            Size = new Size(100, 20)
+        };
+        // BtnDelete.Click += ClickDeletar;
+
         Controls.Add(DgvEmprestimos);
 
         Controls.Add(LblDataEmprestimo);
@@ -154,7 +178,10 @@ public class ViewEmprestimos : Form
         Controls.Add(LbLivro);
 
         Controls.Add(BtnCreate);
+        Controls.Add(BtnAlterar);
+        Controls.Add(BtnDelete);
         Listar();
+        listarListBoxs();
     }
     private void Listar()
     {
@@ -204,29 +231,93 @@ public class ViewEmprestimos : Form
             HeaderText = "Livro"
         });
 
+
+
+    }
+    private void listarListBoxs()
+    {
         List<User> users = ControllerEmprestimo.ListarUser();
         foreach (User user in users)
         {
             LbUsuario.Items.Add(user.ToString());
         }
-
+        List<Book> books = ControllerEmprestimo.ListarBook();
+        foreach (Book book in books)
+        {
+            LbLivro.Items.Add(book.ToString());
+        }
     }
-    private void button1_Click(object sender, EventArgs e)
+    private int getUserIndex()
     {
-        // Verifica se há um item selecionado
         if (LbUsuario.SelectedItem != null)
         {
-            // Obtém o item selecionado
-            string selectedItem = LbUsuario.SelectedItem.ToString();
-            // Obtém o índice do item selecionado
-            int selectedIndex = LbUsuario.SelectedIndex;
-            // Exibe o item selecionado e seu índice em uma MessageBox
-            MessageBox.Show($"Item selecionado: {selectedItem}\nÍndice do item: {selectedIndex}");
+            return LbUsuario.SelectedIndex;
+
         }
         else
         {
-            MessageBox.Show("Nenhum item selecionado.");
+            MessageBox.Show("Nenhum usuario selecionado.");
+            return 0;
         }
+    }
+    private int getBookIndex()
+    {
+        if (LbLivro.SelectedItem != null)
+        {
+            return LbLivro.SelectedIndex;
+
+        }
+        else
+        {
+            MessageBox.Show("Nenhum livro selecionado.");
+            return 0;
+        }
+    }
+    private void ClickCreate(object sender, EventArgs e)
+    {
+        if (InpDataEmprestimo.Text == "")
+        {
+            MessageBox.Show("Preencha a Data de Empréstimo");
+            return;
+        }
+        if (InpDataPrazo.Text == "")
+        {
+            MessageBox.Show("Preencha a Data de Prazo");
+            return;
+        }
+        if (InpDataDevolucao.Text == "")
+        {
+            MessageBox.Show("Preencha a Data de Devolução");
+            return;
+        }
+        if (InpHorario.Text == "")
+        {
+            MessageBox.Show("Preencha o Horário");
+            return;
+        }
+
+        // Captura os valores dos campos de entrada
+        string dataEmprestimo = InpDataEmprestimo.Text;
+        string dataPrazo = InpDataPrazo.Text;
+        string dataDevolucao = InpDataDevolucao.Text;
+        string horario = InpHorario.Text;
+
+        // Obtém os índices selecionados das listas
+        int indexUsuario = getUserIndex();
+        int indexLivro = getBookIndex();
+
+        // Verifica se os índices são válidos
+        if (indexUsuario < 0 || indexLivro < 0)
+        {
+            MessageBox.Show("Selecione um usuário e um livro válidos.");
+            return;
+        }
+
+        // Chama o método para criar um novo empréstimo
+        ControllerEmprestimo.Create(dataEmprestimo, dataPrazo, dataDevolucao, horario, indexUsuario, indexLivro);
+
+        // Atualiza a exibição da lista de empréstimos
+        Listar();
     }
 
 }
