@@ -1,3 +1,7 @@
+using System;
+using System.Data;
+using System.Windows.Forms;
+
 using Controller;
 using Model;
 
@@ -6,6 +10,7 @@ namespace View;
 public class ViewEmprestimos : Form
 {
     private readonly DataGridView DgvEmprestimos;
+
 
     private readonly Label LblDataEmprestimo;
     private readonly Label LblDataPrazo;
@@ -143,7 +148,7 @@ public class ViewEmprestimos : Form
         BtnAlterar = new Button
         {
             Text = "Alterar",
-            Location = new Point(700, sep + sep),
+            Location = new Point(700, sep + 25),
             Size = new Size(100, 20)
         };
         BtnAlterar.Click += ClickAlterar;
@@ -151,7 +156,7 @@ public class ViewEmprestimos : Form
         BtnDelete = new Button
         {
             Text = "Delete",
-            Location = new Point(700, sep + (sep * 2)),
+            Location = new Point(700, sep + sep),
             Size = new Size(100, 20)
         };
         BtnDelete.Click += ClickDeletar;
@@ -180,6 +185,9 @@ public class ViewEmprestimos : Form
         Controls.Add(BtnCreate);
         Controls.Add(BtnAlterar);
         Controls.Add(BtnDelete);
+        Controls.Add(BtnclearFilter);
+        Controls.Add(BtnFilterUser);
+        Controls.Add(BtnfilterBook);
         Listar();
         listarListBoxs();
     }
@@ -366,5 +374,4 @@ public class ViewEmprestimos : Form
         ControllerEmprestimo.Delete(index);
         Listar();
     }
-
 }
