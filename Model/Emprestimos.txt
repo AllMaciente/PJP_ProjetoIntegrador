@@ -36,14 +36,6 @@ public class Emprestimo
     public static List<Emprestimo> ListarEmprestimo()
     {
         return RepoEmprestimos.ListEmprestimos();
-
-    }
-
-    public static Delete(int indece){
-        RepoEmprestimos.Delete(indece);
-    }
-    public static Update(int indice, string data_emprestimo, string data_prazo, string data_devolucao, string horario, int id_usuario, int id_livro){
-        RepoEmprestimos.Update(indece,data_emprestimo, data_prazo, data_devolucao, horario, id_usuario, id_livro);
     }
     public static void testDB()
     {

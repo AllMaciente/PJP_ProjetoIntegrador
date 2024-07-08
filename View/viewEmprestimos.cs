@@ -146,7 +146,7 @@ public class ViewEmprestimos : Form
             Location = new Point(700, sep + sep),
             Size = new Size(100, 20)
         };
-        // BtnAlterar.Click += ClickAlterar;
+        BtnAlterar.Click += ClickAlterar;
 
         BtnDelete = new Button
         {
@@ -154,7 +154,7 @@ public class ViewEmprestimos : Form
             Location = new Point(700, sep + (sep * 2)),
             Size = new Size(100, 20)
         };
-        // BtnDelete.Click += ClickDeletar;
+        BtnDelete.Click += ClickDeletar;
 
         Controls.Add(DgvEmprestimos);
 
@@ -320,52 +320,46 @@ public class ViewEmprestimos : Form
         Listar();
     }
     private void ClickAlterar(object sender, EventArgs e)
+{
+    if (InpDataEmprestimo.Text == "")
     {
-        if (InpDataEmprestimo.Text == "")
-        {
-            MessageBox.Show("Preencha a Data de Empréstimo");
-            return;
-        }
-        if (InpDataPrazo.Text == "")
-        {
-            MessageBox.Show("Preencha a Data de Prazo");
-            return;
-        }
-        if (InpDataDevolucao.Text == "")
-        {
-            MessageBox.Show("Preencha a Data de Devolução");
-            return;
-        }
-        if (InpHorario.Text == "")
-        {
-            MessageBox.Show("Preencha o Horário");
-            return;
-        }
-        // Captura os valores dos campos de entrada
-        string dataEmprestimo = InpDataEmprestimo.Text;
-        string dataPrazo = InpDataPrazo.Text;
-        string dataDevolucao = InpDataDevolucao.Text;
-        string horario = InpHorario.Text;
-
-        // Obtém os índices selecionados das listas
-        int indexUsuario = getUserIndex();
-        int indexLivro = getBookIndex();
-
-        int index = DgvEmprestimos.SelectedRows[0].Index;
-
-        // Verifica se os índices são válidos
-        if (indexUsuario < 0 || indexLivro < 0)
-        {
-            MessageBox.Show("Selecione um usuário e um livro válidos.");
-            return;
-        }
-
-        // Chama o método para criar um novo empréstimo
-        ControllerEmprestimo.Update(dataEmprestimo, dataPrazo, dataDevolucao, horario, indexUsuario, indexLivro);
-
-        // Atualiza a exibição da lista de empréstimos
-        Listar();
+        MessageBox.Show("Preencha a Data de Empréstimo");
+        return;
     }
+    if (InpDataPrazo.Text == "")
+    {
+        MessageBox.Show("Preencha a Data de Prazo");
+        return;
+    }
+    if (InpDataDevolucao.Text == "")
+    {
+        MessageBox.Show("Preencha a Data de Devolução");
+        return;
+    }
+    if (InpHorario.Text == "")
+    {
+        MessageBox.Show("Preencha o Horário");
+        return;
+    }
+    // Captura os valores dos campos de entrada
+    string dataEmprestimo = InpDataEmprestimo.Text;
+    string dataPrazo = InpDataPrazo.Text;
+    string dataDevolucao = InpDataDevolucao.Text;
+    string horario = InpHorario.Text;
+
+    // Obtém os índices selecionados das listas
+
+
+    int index = DgvEmprestimos.SelectedRows[0].Index;
+
+
+    // Chama o método para criar um novo empréstimo
+    ControllerEmprestimo.Update(index, dataEmprestimo, dataPrazo, dataDevolucao, horario);
+
+    // Atualiza a exibição da lista de empréstimos
+    Listar();
+}
+
     private void ClickDeletar(object? sender, EventArgs e)
     {
         int index = DgvEmprestimos.SelectedRows[0].Index;

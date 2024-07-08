@@ -14,7 +14,6 @@ public class Emprestimo
     public string Usuario { get; set; }
     public string Livro { get; set; }
 
-
     public Emprestimo() { }
     public Emprestimo(string data_emprestimo, string data_prazo, string data_devolucao, string horario, int id_usuario, int id_livro)
     {
@@ -25,7 +24,6 @@ public class Emprestimo
         Id_usuario = id_usuario;
         Id_livro = id_livro;
 
-        // Aqui você chama a função para adicionar o empréstimo ao banco de dados
         RepoEmprestimos.AddEmprestimo(this);
     }
 
@@ -33,16 +31,25 @@ public class Emprestimo
     {
         return RepoEmprestimos.Sincronizar();
     }
+
     public static List<Emprestimo> ListarEmprestimo()
     {
         return RepoEmprestimos.ListEmprestimos();
     }
-    public static void testDB()
+
+    public static void Delete(int indice)
     {
-        RepoEmprestimos.InitConexao();
-
-        RepoEmprestimos.CloseConexao();
-
+        RepoEmprestimos.Delete(indice);
     }
 
+    public static void Update(int indice, string data_emprestimo, string data_prazo, string data_devolucao, string horario)
+    {
+        RepoEmprestimos.Update(indice, data_emprestimo, data_prazo, data_devolucao, horario);
+    }
+
+    public static void TestDB()
+    {
+        RepoEmprestimos.InitConexao();
+        RepoEmprestimos.CloseConexao();
+    }
 }

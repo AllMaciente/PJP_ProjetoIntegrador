@@ -5,7 +5,7 @@ public class ControllerEmprestimo
 {
     public static void testDB()
     {
-        Emprestimo.testDB();
+        Emprestimo.TestDB();
     }
     public static List<Emprestimo> ListarEmprestimos()
     {
@@ -30,9 +30,9 @@ public class ControllerEmprestimo
     {
         new Emprestimo(data_emprestimo, data_prazo, data_devolucao, horario, id_usuario, id_livro);
     }
-    public static void Update(int indece ,string data_emprestimo, string data_prazo, string data_devolucao, string horario, int id_usuario, int id_livro)
+    public static void Update(int indece ,string data_emprestimo, string data_prazo, string data_devolucao, string horario)
     {
-        Emprestimo.Update(indece,data_emprestimo, data_prazo, data_devolucao, horario, id_usuario, id_livro);
+        Emprestimo.Update(indece,data_emprestimo, data_prazo, data_devolucao, horario);
     }
     public static void Delete(int indece)
     {

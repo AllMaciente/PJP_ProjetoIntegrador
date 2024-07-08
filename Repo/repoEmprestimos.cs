@@ -130,23 +130,21 @@ public class RepoEmprestimos
         CloseConexao();
         return emprestimos;
     }
-    public static void Update(int indice, string data_emprestimo, string data_prazo, string data_devolucao, string horario, int id_usuario, int id_livro)
+    public static void Update(int indice, string data_emprestimo, string data_prazo, string data_devolucao, string horario)
         {
             InitConexao();
-            string query = "UPDATE emprestimos SET data_emprestimo = @DataEmprestimo, data_prazo = @DataPrazo, data_devolucao = @DataDevolucao, horario = @Horario, id_usuario = @IdUsuario, id_livro = @IdLivro WHERE id = @Id";
+            string query = "UPDATE emprestimos SET data_emprestimo = @DataEmprestimo, data_prazo = @DataPrazo, data_devolucao = @DataDevolucao, horario = @Horario WHERE id_emprestimo = @Id";
             MySqlCommand command = new MySqlCommand(query, conexao);
             Emprestimo emprestimo = emprestimos[indice];
             try
             {
-                if (nome != null || data != null || hora != null)
+                if (data_emprestimo != null || data_prazo != null || data_devolucao != null || horario != null)
                 {
-                    command.Parameters.AddWithValue("@Id", emprestimos.Id);
+                    command.Parameters.AddWithValue("@Id", emprestimo.Id);
                     command.Parameters.AddWithValue("@DataEmprestimo", data_emprestimo);
                     command.Parameters.AddWithValue("@DataPrazo", data_prazo);
                     command.Parameters.AddWithValue("@DataDevolucao", data_devolucao);
                     command.Parameters.AddWithValue("@Horario", horario);
-                    command.Parameters.AddWithValue("@IdUsuario", id_usuario);
-                    command.Parameters.AddWithValue("@IdLivro", id_livro);
 
                     int rowsAffected = command.ExecuteNonQuery();
 
@@ -156,8 +154,6 @@ public class RepoEmprestimos
                         emprestimo.Data_prazo = data_prazo;
                         emprestimo.Data_devolucao = data_devolucao;
                         emprestimo.Horario = horario;
-                        emprestimo.Id_usuario = id_usuario;
-                        emprestimo.Id_livro = id_livro;
 
                         emprestimo.Usuario = getName(emprestimo.Id_usuario);
                         emprestimo.Livro = getBook(emprestimo.Id_livro);
@@ -182,7 +178,7 @@ public class RepoEmprestimos
         public static void Delete(int index)
         {
             InitConexao();
-            string delete = "DELETE FROM emprestimos WHERE id = @Id";
+            string delete = "DELETE FROM emprestimos WHERE id_emprestimo = @Id";
             MySqlCommand command = new MySqlCommand(delete, conexao);
             command.Parameters.AddWithValue("@Id", emprestimos[index].Id);
             // executar
