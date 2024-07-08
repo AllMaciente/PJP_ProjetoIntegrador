@@ -28,7 +28,7 @@ namespace Model
 
         public override string ToString()
         {
-            return Livro;
+            return $"{Id} - {Livro}";
         }
     }
 }

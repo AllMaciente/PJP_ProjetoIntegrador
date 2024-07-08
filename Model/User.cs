@@ -27,7 +27,7 @@ namespace Model
         }
         public override string ToString()
         {
-            return Usuario;
+            return $"{Id} - {Usuario}";
         }
     }
 }

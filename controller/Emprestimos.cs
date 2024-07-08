@@ -38,6 +38,11 @@ public class ControllerEmprestimo
     {
         Emprestimo.Delete(indece);
     }
-
+    public static string ObterNomeUsuario(int id)
+    {
+        // Supondo que você tenha uma lista de usuários ou um método para obter o usuário pelo id
+        Emprestimo usuario = ListarEmprestimos().FirstOrDefault(u => u.Id == id);
+        return usuario != null ? usuario.Usuario : "Usuário não encontrado";
+    }
 
 }

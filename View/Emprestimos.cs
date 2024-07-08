@@ -185,9 +185,6 @@ public class ViewEmprestimos : Form
         Controls.Add(BtnCreate);
         Controls.Add(BtnAlterar);
         Controls.Add(BtnDelete);
-        Controls.Add(BtnclearFilter);
-        Controls.Add(BtnFilterUser);
-        Controls.Add(BtnfilterBook);
         Listar();
         listarListBoxs();
     }
