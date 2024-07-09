@@ -11,6 +11,7 @@ public class ViewEmprestimos : Form
 {
     private readonly DataGridView DgvEmprestimos;
 
+    private readonly Label LblTitle;
 
     private readonly Label LblDataEmprestimo;
     private readonly Label LblDataPrazo;
@@ -39,8 +40,18 @@ private readonly TextBox InpIdLivro;
 
         int point2 = 0;
         int sep = 50;
+        Text = "Emprestimos";
         Size = new Size(850, 550);
         StartPosition = FormStartPosition.CenterScreen;
+        LblTitle = new Label
+        {
+            Text = $"Bem Vindo Aos Empréstimos",
+            Location = new Point(25, 25),
+            AutoSize = true,
+            Font = new Font("Arial", 12, FontStyle.Bold)
+        };
+
+
         DgvEmprestimos = new DataGridView
         {
             Location = new Point(0, 250),
@@ -159,6 +170,8 @@ InpIdLivro = new TextBox
         BtnDelete.Click += ClickDeletar;
 
         Controls.Add(DgvEmprestimos);
+
+        Controls.Add(LblTitle);
 
         Controls.Add(LblDataEmprestimo);
         Controls.Add(LblDataDevolucao);
