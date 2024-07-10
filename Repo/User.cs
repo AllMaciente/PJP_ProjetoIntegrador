@@ -86,10 +86,10 @@ namespace Repo
             CloseConexao();
         }
 
-        public static void UpdatePessoa(
+        public static void Update(
             int indice,
             string usuario,
-            int data_nascimento,
+            string data_nascimento,
             string cpf
         ){
             InitConexao();
