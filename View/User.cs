@@ -24,68 +24,68 @@ namespace View
         {
             ControllerUser.Sincronizar();
             Text = "Usuários";
-            Size = new Size(600, 500);
+            Size = new Size(500, 400);
             StartPosition = FormStartPosition.CenterScreen;
 
             LblNome = new Label
             {
                 Text = "Nome: ",
-                Location = new Point(50, 50),
+                Location = new Point(50, 25),
             };
             LblCpf = new Label
             {
                 Text = "Cpf: ",
-                Location = new Point(50, 100),
+                Location = new Point(50, 75),
             };
             LblDataNascimento = new Label
             {
                 Text = "Data De Nascimento: ",
-                Location = new Point(50, 150),
+                Location = new Point(50, 125),
                 Size = new Size(100,40)
             };
 
             InpNome = new TextBox
             {
                 Name = "Nome",
-                Location = new Point(150, 50),
+                Location = new Point(150, 25),
                 Size = new Size(200, 20)
             };
             InpCpf = new TextBox
             {
                 Name = "Cpf",
-                Location = new Point(150, 100),
+                Location = new Point(150, 75),
                 Size = new Size(200, 20)
             };
             InpDataNascimento = new TextBox
             {
                 Name = "DataNascimento",
-                Location = new Point(150, 150),
+                Location = new Point(150, 125),
                 Size = new Size(200, 20)
             };
 
             BtnCadastrar = new Button
             {
                 Text = "Cadastrar",
-                Location = new Point(400, 50),
+                Location = new Point(375, 25),
             };
             BtnCadastrar.Click += ClickCadastrar;
             BtnAlterar = new Button
             {
                 Text = "Alterar",
-                Location = new Point(400, 100),
+                Location = new Point(375, 75),
             };
             BtnAlterar.Click += ClickAlterar;
             BtnDeletar = new Button
             {
                 Text = "Deletar",
-                Location = new Point(400, 150),
+                Location = new Point(375, 125),
             };
             BtnDeletar.Click += ClickDeletar;
 
             DgvUsuarios = new DataGridView
             {
-                Location = new Point(0, 250),
-                Size = new Size(600, 250),
+                Location = new Point(0, 200),
+                Size = new Size(500, 150),
                 AutoGenerateColumns = false
             };
 
