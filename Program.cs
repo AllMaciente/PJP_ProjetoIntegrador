@@ -5,6 +5,6 @@ static class Program
 {
     static void Main()
     {
-        Application.Run(new ViewEmprestimos());
+        Application.Run(new ViewUser());
     }
 }
