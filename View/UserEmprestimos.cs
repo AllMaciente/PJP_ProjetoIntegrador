@@ -13,7 +13,8 @@ namespace View
         private readonly DataGridView DgvEmprestimos;
         private readonly Label LblUser;
         private readonly Button BtnDetalhesMulta;
-        private readonly TextBox TxtIdMulta; // Novo TextBox para inserir o ID da multa
+        private readonly Button BtnVoltar;
+        private readonly TextBox TxtIdMulta;
         private readonly string Usuario;
 
         public ViewUserEmprestimos(int id)
@@ -21,7 +22,9 @@ namespace View
             ControllerEmprestimo.Sincronizar();
             Usuario = ControllerEmprestimo.ObterNomeUsuario(id);
 
-            Size = new Size(900, 550); // Aumentei um pouco a largura para acomodar o TextBox
+            Text = $"Emprestimos {Usuario}";
+            ControlBox = false;
+            Size = new Size(900, 550);
             StartPosition = FormStartPosition.CenterScreen;
 
             LblUser = new Label
@@ -41,24 +44,33 @@ namespace View
                 MultiSelect = false
             };
 
-            BtnDetalhesMulta = new Button
-            {
-                Text = "Ver Detalhes da Multa",
-                Location = new Point(520, 475), // Posição ajustada para acomodar o TextBox
-                Size = new Size(150, 30)
-            };
-            BtnDetalhesMulta.Click += BtnDetalhesMulta_Click;
+            // BtnDetalhesMulta = new Button
+            // {
+            //     Text = "Ver Detalhes da Multa",
+            //     Location = new Point(520, 475),
+            //     Size = new Size(150, 30)
+            // };
+            // BtnDetalhesMulta.Click += BtnDetalhesMulta_Click;
 
-            TxtIdMulta = new TextBox
+            // TxtIdMulta = new TextBox
+            // {
+            //     Location = new Point(350, 475),
+            //     Size = new Size(150, 30)
+            // };
+
+            BtnVoltar = new Button
             {
-                Location = new Point(350, 475), // Posição ajustada para ficar ao lado do botão
+                Text = "Voltar",
+                Location = new Point(700, 475),
                 Size = new Size(150, 30)
             };
+            BtnVoltar.Click += BtnVoltar_Click;
 
             Controls.Add(DgvEmprestimos);
             Controls.Add(LblUser);
             Controls.Add(BtnDetalhesMulta);
-            Controls.Add(TxtIdMulta); // Adiciona o TextBox à lista de controles
+            Controls.Add(TxtIdMulta);
+            Controls.Add(BtnVoltar);
 
             Listar(id);
         }
@@ -101,11 +113,6 @@ namespace View
                 DataPropertyName = "Horario",
                 HeaderText = "Horário"
             });
-            DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "Id_multa",
-                HeaderText = "Id Multa"
-            });
 
             DgvEmprestimos.DataSource = emprestimos;
         }
@@ -126,6 +133,15 @@ namespace View
             else
             {
                 MessageBox.Show("Por favor, insira um ID válido para a multa.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void BtnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            if (ViewHome.CurrentInstance != null)
+            {
+                ViewHome.CurrentInstance.Show();
             }
         }
     }

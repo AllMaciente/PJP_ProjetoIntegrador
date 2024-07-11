@@ -9,6 +9,8 @@ namespace View
 {
     public class ViewUser : Form
     {
+        private readonly Button BtnVoltar;
+
         private readonly Label LblNome;
         private readonly Label LblCpf;
         private readonly Label LblDataNascimento;
@@ -41,7 +43,7 @@ namespace View
             {
                 Text = "Data De Nascimento: ",
                 Location = new Point(50, 125),
-                Size = new Size(100,40)
+                Size = new Size(100, 40)
             };
 
             InpNome = new TextBox
@@ -88,6 +90,13 @@ namespace View
                 Size = new Size(500, 150),
                 AutoGenerateColumns = false
             };
+            BtnVoltar = new Button
+            {
+                Text = "Voltar",
+                Location = new Point(0, 0),
+                Size = new Size(70, 20)
+            };
+            BtnVoltar.Click += BtnVoltar_Click;
 
             Controls.Add(LblNome);
             Controls.Add(LblCpf);
@@ -99,7 +108,9 @@ namespace View
             Controls.Add(BtnAlterar);
             Controls.Add(BtnDeletar);
             Controls.Add(DgvUsuarios);
-            
+            Controls.Add(BtnVoltar);
+
+
             Listar();
         }
 
@@ -142,7 +153,7 @@ namespace View
             List<User> users = ControllerUser.Listar();
             DgvUsuarios.DataSource = null;
             DgvUsuarios.DataSource = users;
-            
+
             if (DgvUsuarios.Columns.Count == 0)
             {
                 DgvUsuarios.Columns.Add(new DataGridViewTextBoxColumn
@@ -165,6 +176,14 @@ namespace View
                     DataPropertyName = "Data_nascimento",
                     HeaderText = "Data de Nascimento"
                 });
+            }
+        }
+        private void BtnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            if (ViewHome.CurrentInstance != null)
+            {
+                ViewHome.CurrentInstance.Show();
             }
         }
     }

@@ -9,6 +9,8 @@ namespace View;
 
 public class ViewEmprestimos : Form
 {
+
+    private readonly Button BtnVoltar;
     private readonly DataGridView DgvEmprestimos;
 
 
@@ -26,7 +28,7 @@ public class ViewEmprestimos : Form
     private readonly TextBox InpHorario;
     private readonly TextBox InpIdMulta;
     private readonly TextBox InpIdUsuario;
-private readonly TextBox InpIdLivro;
+    private readonly TextBox InpIdLivro;
 
 
     private readonly Button BtnCreate;
@@ -39,6 +41,7 @@ private readonly TextBox InpIdLivro;
 
         int point2 = 0;
         int sep = 50;
+        Text = "Emprestimo";
         Size = new Size(850, 550);
         StartPosition = FormStartPosition.CenterScreen;
         DgvEmprestimos = new DataGridView
@@ -121,18 +124,18 @@ private readonly TextBox InpIdLivro;
         };
 
         InpIdUsuario = new TextBox
-{
-    Name = "InpIdUsuario",
-    Location = new Point(300, sep * 2),
-    Size = new Size(150, 30)
-};
+        {
+            Name = "InpIdUsuario",
+            Location = new Point(300, sep * 2),
+            Size = new Size(150, 30)
+        };
 
-InpIdLivro = new TextBox
-{
-    Name = "InpIdLivro",
-    Location = new Point(500, sep * 2),
-    Size = new Size(150, 30)
-};
+        InpIdLivro = new TextBox
+        {
+            Name = "InpIdLivro",
+            Location = new Point(500, sep * 2),
+            Size = new Size(150, 30)
+        };
 
         BtnCreate = new Button
         {
@@ -158,6 +161,15 @@ InpIdLivro = new TextBox
         };
         BtnDelete.Click += ClickDeletar;
 
+        BtnVoltar = new Button
+        {
+            Text = "Voltar",
+            Location = new Point(0, 0),
+            Size = new Size(150, 30)
+        };
+        BtnVoltar.Click += BtnVoltar_Click;
+
+
         Controls.Add(DgvEmprestimos);
 
         Controls.Add(LblDataEmprestimo);
@@ -174,13 +186,14 @@ InpIdLivro = new TextBox
         Controls.Add(InpHorario);
         Controls.Add(InpIdMulta);
         Controls.Add(InpIdUsuario); // Changed from InpUsuario
-Controls.Add(InpIdLivro);   // Changed from InpLivro
+        Controls.Add(InpIdLivro);   // Changed from InpLivro
 
 
 
         Controls.Add(BtnCreate);
         Controls.Add(BtnAlterar);
         Controls.Add(BtnDelete);
+        Controls.Add(BtnVoltar);
         Listar();
     }
     private void Listar()
@@ -235,49 +248,57 @@ Controls.Add(InpIdLivro);   // Changed from InpLivro
 
     }
     // Dentro do método ClickCreate
-private void ClickCreate(object sender, EventArgs e)
-{
+    private void ClickCreate(object sender, EventArgs e)
+    {
 
-    // Obtenha os IDs digitados nos TextBoxes
-int idUsuario = Convert.ToInt32(InpIdUsuario.Text);
-int idLivro = Convert.ToInt32(InpIdLivro.Text);
+        // Obtenha os IDs digitados nos TextBoxes
+        int idUsuario = Convert.ToInt32(InpIdUsuario.Text);
+        int idLivro = Convert.ToInt32(InpIdLivro.Text);
 
 
-    // Captura os valores dos campos de entrada
-    string dataEmprestimo = InpDataEmprestimo.Text;
-    string dataPrazo = InpDataPrazo.Text;
-    string dataDevolucao = InpDataDevolucao.Text;
-    string horario = InpHorario.Text;
+        // Captura os valores dos campos de entrada
+        string dataEmprestimo = InpDataEmprestimo.Text;
+        string dataPrazo = InpDataPrazo.Text;
+        string dataDevolucao = InpDataDevolucao.Text;
+        string horario = InpHorario.Text;
 
-    // Chama o método para criar um novo empréstimo
-    ControllerEmprestimo.Create(dataEmprestimo, dataPrazo, dataDevolucao, horario, idUsuario, idLivro);
+        // Chama o método para criar um novo empréstimo
+        ControllerEmprestimo.Create(dataEmprestimo, dataPrazo, dataDevolucao, horario, idUsuario, idLivro);
 
-    // Atualize a exibição da lista de empréstimos
-    Listar();
-}
+        // Atualize a exibição da lista de empréstimos
+        Listar();
+    }
 
-// Dentro do método ClickAlterar
-private void ClickAlterar(object sender, EventArgs e)
-{
-    // Obtenha os IDs digitados nos TextBoxes
-    int index = DgvEmprestimos.SelectedRows[0].Index;
-    // Captura os valores dos campos de entrada
-    string dataEmprestimo = InpDataEmprestimo.Text;
-    string dataPrazo = InpDataPrazo.Text;
-    string dataDevolucao = InpDataDevolucao.Text;
-    string horario = InpHorario.Text;
+    // Dentro do método ClickAlterar
+    private void ClickAlterar(object sender, EventArgs e)
+    {
+        // Obtenha os IDs digitados nos TextBoxes
+        int index = DgvEmprestimos.SelectedRows[0].Index;
+        // Captura os valores dos campos de entrada
+        string dataEmprestimo = InpDataEmprestimo.Text;
+        string dataPrazo = InpDataPrazo.Text;
+        string dataDevolucao = InpDataDevolucao.Text;
+        string horario = InpHorario.Text;
 
-    // Chama o método para atualizar o empréstimo
-    ControllerEmprestimo.Update(index, dataEmprestimo, dataPrazo, dataDevolucao, horario);
+        // Chama o método para atualizar o empréstimo
+        ControllerEmprestimo.Update(index, dataEmprestimo, dataPrazo, dataDevolucao, horario);
 
-    // Atualize a exibição da lista de empréstimos
-    Listar();
-}
+        // Atualize a exibição da lista de empréstimos
+        Listar();
+    }
 
     private void ClickDeletar(object? sender, EventArgs e)
     {
         int index = DgvEmprestimos.SelectedRows[0].Index;
         ControllerEmprestimo.Delete(index);
         Listar();
+    }
+    private void BtnVoltar_Click(object sender, EventArgs e)
+    {
+        this.Close();
+        if (ViewHome.CurrentInstance != null)
+        {
+            ViewHome.CurrentInstance.Show();
+        }
     }
 }
