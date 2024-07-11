@@ -114,11 +114,11 @@ namespace View
         {
             string idMultaInput = TxtIdMulta.Text.Trim();
             int idMulta;
-            
+
             if (int.TryParse(idMultaInput, out idMulta))
             {
-                string message = idMulta != 0 
-                    ? $"O ID da multa é: {idMulta}" 
+                string message = idMulta != 0
+                    ? $"O ID da multa é: {idMulta}"
                     : "Não há multa associada a este empréstimo.";
 
                 MessageBox.Show(message, "Detalhes da Multa", MessageBoxButtons.OK, MessageBoxIcon.Information);
