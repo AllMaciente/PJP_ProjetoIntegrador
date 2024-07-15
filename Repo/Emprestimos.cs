@@ -123,8 +123,8 @@ public class RepoEmprestimos
             emp.Id_multa = readerSync["id_multa"] != DBNull.Value ? Convert.ToInt32(readerSync["id_multa"]) : 0;
             emp.Id_usuario = Convert.ToInt32(readerSync["id_usuario"].ToString());
             emp.Id_livro = Convert.ToInt32(readerSync["id_livro"].ToString());
-            emp.Usuario = getName(emp.Id_usuario);
-            emp.Livro = getBook(emp.Id_livro);
+            // emp.Usuario = getName(emp.Id_usuario);
+            // emp.Livro = getBook(emp.Id_livro);
             emprestimos.Add(emp);
         }
         CloseConexao();

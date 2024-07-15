@@ -230,11 +230,6 @@ public class ViewEmprestimos : Form
         });
         DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
         {
-            DataPropertyName = "Id_multa",
-            HeaderText = "Id Multa"
-        });
-        DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
-        {
             DataPropertyName = "Usuario",
             HeaderText = "Usuario"
         });
