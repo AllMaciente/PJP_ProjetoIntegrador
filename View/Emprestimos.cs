@@ -10,34 +10,42 @@ namespace View;
 public class ViewEmprestimos : Form
 {
 
-    private readonly Button BtnVoltar;
-    private readonly DataGridView DgvEmprestimos;
+    private Button BtnVoltar;
+    private DataGridView DgvEmprestimos;
 
 
-    private readonly Label LblDataEmprestimo;
-    private readonly Label LblDataPrazo;
-    private readonly Label LblDataDevolucao;
-    private readonly Label LblHorario;
-    private readonly Label LblIdMulta;
-    private readonly Label LblUsuario;
-    private readonly Label LblLivro;
+    private Label LblDataEmprestimo;
+    private Label LblDataPrazo;
+    private Label LblDataDevolucao;
+    private Label LblHorario;
+    private Label LblIdMulta;
+    private Label LblUsuario;
+    private Label LblLivro;
 
-    private readonly TextBox InpDataEmprestimo;
-    private readonly TextBox InpDataPrazo;
-    private readonly TextBox InpDataDevolucao;
-    private readonly TextBox InpHorario;
-    private readonly TextBox InpIdMulta;
-    private readonly TextBox InpIdUsuario;
-    private readonly TextBox InpIdLivro;
+    private TextBox InpDataEmprestimo;
+    private TextBox InpDataPrazo;
+    private TextBox InpDataDevolucao;
+    private TextBox InpHorario;
+    private TextBox InpIdMulta;
+    private TextBox InpIdUsuario;
+    private TextBox InpIdLivro;
 
 
-    private readonly Button BtnCreate;
-    private readonly Button BtnAlterar;
-    private readonly Button BtnDelete;
+    private Button BtnCreate;
+    private Button BtnAlterar;
+    private Button BtnDelete;
+    private BindingSource _bindingSource;
+
 
     public ViewEmprestimos()
     {
+        InitializeComponent();
+        Listar();
+    }
+    private void InitializeComponent()
+    {
         ControllerEmprestimo.Sincronizar();
+        _bindingSource = new BindingSource();
 
         int point2 = 0;
         int sep = 50;
@@ -194,15 +202,20 @@ public class ViewEmprestimos : Form
         Controls.Add(BtnAlterar);
         Controls.Add(BtnDelete);
         Controls.Add(BtnVoltar);
-        Listar();
     }
     private void Listar()
     {
         List<Emprestimo> emprestimos = ControllerEmprestimo.ListarEmprestimos();
+        _bindingSource.DataSource = emprestimos;
+        DgvEmprestimos.DataSource = _bindingSource;
+
         DgvEmprestimos.Columns.Clear();
         DgvEmprestimos.AutoGenerateColumns = false;
-        DgvEmprestimos.DataSource = emprestimos;
+        AdicionarColunasAoDataGridView();
 
+    }
+    private void AdicionarColunasAoDataGridView()
+    {
         DgvEmprestimos.Columns.Add(new DataGridViewTextBoxColumn
         {
             DataPropertyName = "Id",
@@ -290,10 +303,16 @@ public class ViewEmprestimos : Form
     }
     private void BtnVoltar_Click(object sender, EventArgs e)
     {
+        LimparDataGridView();
         this.Close();
         if (ViewHome.CurrentInstance != null)
         {
             ViewHome.CurrentInstance.Show();
         }
+    }
+    private void LimparDataGridView()
+    {
+        _bindingSource.Clear();
+        DgvEmprestimos.Columns.Clear();
     }
 }

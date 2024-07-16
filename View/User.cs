@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Controller;
 using Model;
@@ -9,22 +10,31 @@ namespace View
 {
     public class ViewUser : Form
     {
-        private readonly Button BtnVoltar;
+        private Button BtnVoltar;
 
-        private readonly Label LblNome;
-        private readonly Label LblCpf;
-        private readonly Label LblDataNascimento;
-        private readonly TextBox InpNome;
-        private readonly TextBox InpCpf;
-        private readonly TextBox InpDataNascimento;
-        private readonly Button BtnCadastrar;
-        private readonly Button BtnAlterar;
-        private readonly Button BtnDeletar;
-        private readonly DataGridView DgvUsuarios;
+        private Label LblNome;
+        private Label LblCpf;
+        private Label LblDataNascimento;
+        private TextBox InpNome;
+        private TextBox InpCpf;
+        private TextBox InpDataNascimento;
+        private Button BtnCadastrar;
+        private Button BtnAlterar;
+        private Button BtnDeletar;
+        private DataGridView DgvUsuarios;
+
+        private BindingSource _bindingSource;
 
         public ViewUser()
         {
+            InitializeComponent();
+            Listar();
+        }
+        private void InitializeComponent()
+        {
             ControllerUser.Sincronizar();
+            _bindingSource = new BindingSource();
+
             Text = "Usuários";
             Size = new Size(500, 400);
             StartPosition = FormStartPosition.CenterScreen;
@@ -111,9 +121,7 @@ namespace View
             Controls.Add(BtnVoltar);
 
 
-            Listar();
         }
-
         private void ClickCadastrar(object? sender, EventArgs e)
         {
             if (InpNome.Text == "")
@@ -151,9 +159,15 @@ namespace View
         private void Listar()
         {
             List<User> users = ControllerUser.Listar();
-            DgvUsuarios.DataSource = null;
-            DgvUsuarios.DataSource = users;
+            _bindingSource.DataSource = users;
+            DgvUsuarios.DataSource = _bindingSource;
 
+            DgvUsuarios.Columns.Clear();
+            DgvUsuarios.AutoGenerateColumns = false;
+            AdicionarColunasAoDataGridView();
+        }
+        private void AdicionarColunasAoDataGridView()
+        {
             if (DgvUsuarios.Columns.Count == 0)
             {
                 DgvUsuarios.Columns.Add(new DataGridViewTextBoxColumn
@@ -178,8 +192,14 @@ namespace View
                 });
             }
         }
+        private void LimparDataGridView()
+        {
+            _bindingSource.Clear();
+            DgvUsuarios.Columns.Clear();
+        }
         private void BtnVoltar_Click(object sender, EventArgs e)
         {
+            LimparDataGridView();
             this.Close();
             if (ViewHome.CurrentInstance != null)
             {
