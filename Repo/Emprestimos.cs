@@ -16,7 +16,7 @@ public class RepoEmprestimos
 
     public static void InitConexao()
     {
-        string info = "server=localhost;database=bibliotechDB;user id=root;password=''";
+        string info = "server=localhost;database=bibliotechdb;user id=root;password=''";
         conexao = new MySqlConnection(info);
         try
         {
@@ -120,11 +120,10 @@ public class RepoEmprestimos
             emp.Data_prazo = readerSync["data_prazo"].ToString() ?? "";
             emp.Data_devolucao = readerSync["data_devolucao"].ToString() ?? "";
             emp.Horario = readerSync["horario"].ToString() ?? "";
-            emp.Id_multa = readerSync["id_multa"] != DBNull.Value ? Convert.ToInt32(readerSync["id_multa"]) : 0;
             emp.Id_usuario = Convert.ToInt32(readerSync["id_usuario"].ToString());
             emp.Id_livro = Convert.ToInt32(readerSync["id_livro"].ToString());
-            // emp.Usuario = getName(emp.Id_usuario);
-            // emp.Livro = getBook(emp.Id_livro);
+            emp.Usuario = getName(emp.Id_usuario);
+            emp.Livro = getBook(emp.Id_livro);
             emprestimos.Add(emp);
         }
         CloseConexao();

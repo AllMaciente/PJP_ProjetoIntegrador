@@ -15,15 +15,15 @@ public class ControllerEmprestimo
     {
         Emprestimo.Sincronizar();
         User.Sincronizar();
-        Book.Sincronizar();
+        Livro.Sincronizar();
     }
     public static List<User> ListarUser()
     {
         return User.ListarUser();
     }
-    public static List<Book> ListarBook()
+    public static List<Livro> ListarBook()
     {
-        return Book.ListarBook();
+        return Livro.ListarLivros();
     }
 
     public static void Create(string data_emprestimo, string data_prazo, string data_devolucao, string horario, int id_usuario, int id_livro)

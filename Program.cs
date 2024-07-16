@@ -1,10 +1,11 @@
 using View;
-namespace PJP_ProjetoIntegrador;
+
+namespace BiblioTech;
 
 static class Program
 {
     static void Main()
     {
-        Application.Run(new ViewHome());
-    }
+        Application.Run(new ViewLogin());
+    }    
 }
